@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
@@ -27,29 +27,50 @@
     <script type="text/javascript">
       /* 🏋️‍♂️ 1. Crea elementos de interfaz utilizando la api DOM de Javascript
 
-    - [ ] Crea un elemento H1.
-    - [ ] Crea una lista de al menos dos items
+    - [x] Crea un elemento H1.
+    - [x] Crea una lista de al menos dos items
     */
 
-      const root = document.getElementById('root1')
+      const root1 = document.getElementById('root1')
+      const h1 = document.createElement('h1')
+      h1.innerHTML = 'Hello world!';
+
 
       // 💡
-      // root.appendChild()
+      root1.appendChild(h1)
+
+      const ul = document.createElement('ul')
+      const l1 = document.createElement('li')
+      l1.innerHTML = 'Elemento 1'
+      const l2 = document.createElement('li')
+      l2.innerHTML = 'Elemento 2'
+
+      ul.appendChild(l1)
+      ul.appendChild(l2)
+      root1.appendChild(ul)
 
       /* 🏋️‍♂️ 2. Crea un elemento h1 utilizando las API de React. 
     En React las atributos de los elementos HTML son props
     el atributo textNode o el contenido que se renderizará dentro
     del elemento creado es agregado utilizando la prop "children"
     */
+   const title = React.createElement('h1',{children: 'Hello world!'}) 
 
       /* 🏋️‍♂️ 3. Crea un elementos anidados utilizando las API de React */
       // <h1>Hola <strong>Mundo!</strong></h1>
 
+      const strong = React.createElement('strong', {children: 'world!'})
+      const title2 = React.createElement('h1',{children: ['Hello ', strong]})
+
       /* 🍬  Utilizando `React.createElement` crea una lista de 3 elementos utilizando `ul` y `li`. */
 
+      const li1 = React.createElement('li', {children: 'Elemento 1'})
+      const li2 = React.createElement('li', null, 'Elemento 2')
+      const ul2 = React.createElement('ul', null, li1, li2)
+
       // 💡Para renderizar tus componentes en la pagina debes usar ReactDOM
-      // const root2 = document.getElementById('root2')
-      // ReactDOM.render(h1, root2)
+      const root2 = document.getElementById('root2')
+      ReactDOM.render([title2, ul2], root2)
     </script>
   </body>
 </html>
