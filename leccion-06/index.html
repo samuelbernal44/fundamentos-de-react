@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
@@ -63,7 +63,7 @@
       function Contacts(props) {
         return (
           <div className="contacts-list">
-            {props.map(contact => {
+            {props.contacts.map(contact => {
               return <div className="contact">{contact.name}</div>
             })}
           </div>
@@ -80,7 +80,7 @@
         return (
           <div>
             <h3>{props.user.name}</h3>
-            {/* condicion ? verdadero : falso */}
+            {props.user.contacts.length > 0 ? <Contacts contacts={props.user.contacts} /> : <NoContacts />}
           </div>
         )
       }
@@ -91,7 +91,8 @@
         return (
           <div>
             <h3>{props.user.name}</h3>
-            {/* condicion && Componente */}
+            {props.user.contacts.length > 0 && <Contacts contacts={props.user.contacts} />}
+            {props.user.contacts.length <= 0 && <NoContacts /> }
           </div>
         )
       }
@@ -100,13 +101,38 @@
       // utilizando un bloque if-else.
       // ¿qué ocurre y por que?
 
+      function RenderUsersWithIfElse(props){
+        const render = ()=>{
+          if(props.user.contacts.length > 0){
+            return <Contacts contacts={props.user.contacts} />;
+          } else {
+            return <NoContacts />;
+          }
+        }
+
+        return (
+          <div>
+            <h3>{props.user.name}</h3>
+            {render()}
+          </div >
+        )
+      }
+
       function App() {
         return (
           <div>
             <h1>Lista de Contactos por usuario</h1>
             <RenderUsersWithTernary user={usuarioWithContacts} />
             <hr />
+            <RenderUsersWithTernary user={usuarioWithoutContacts} />
+            <h1>With Logic Operator</h1>
+            <RenderUsersWithLogic user={usuarioWithContacts} />
+            <hr />
             <RenderUsersWithLogic user={usuarioWithoutContacts} />
+            <hr />
+            <h1>With Else if</h1>
+            <RenderUsersWithIfElse user={usuarioWithContacts} />
+            <RenderUsersWithIfElse user={usuarioWithoutContacts} />
           </div>
         )
       }
