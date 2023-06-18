@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
@@ -22,22 +22,26 @@
     <!-- 💡 Aquí será donde escribamos nuestros scripts -->
 
     <script type="text/babel">
-      // 💡 Crea un componente quie muestre la información del usuario
-      // 🏋️‍♂️ ¿Como recibes las props nombre, email y telefono?
+      // 💡 Crea un componente que muestre la información del usuario
+      // 🏋️‍♂️ ¿Como recibes las props nombre, email y teléfono?
       // despliega la información de las props
-      const UserInfo = () => {}
+      const UserInfo = (props) => {
+        const {nombre, email, telefono} = props;
+        return <p>{nombre} - {email} - {telefono}</p>
+      }
 
       // 💡  Este es el component padre que deberá contener al componente UserInfo
       const ParentComponent = () => {
         const nombre = 'User'
         const email = 'user@email.com'
         const telefono = '123344556'
+        const obj = {nombre, email, telefono}
         // 🏋️‍♂️ ¿Que debe retornar este componente padre?
-        return
+        return <UserInfo {...obj}/>
       }
 
       const root = document.getElementById('root')
-      // 💡  sRenderiza el componente padre
+      // 💡  Renderiza el componente padre
       ReactDOM.render(<ParentComponent />, root)
     </script>
   </body>
